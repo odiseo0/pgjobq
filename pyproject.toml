@@ -1,57 +1,31 @@
-[tool.poetry]
+[project]
 name = "pgjobq"
 version = "0.10.0"
-description = "PostgreSQL backed job queues"
-authors = ["Adrian Garcia Badaracco <dev@adriangb.com>"]
-license = "MIT"
+description = ""
+authors = [
+    {name = "Adrian Garcia Badaracco", email = "adrian@adriangb.com"},
+]
+dependencies = [
+    "anyio>=3.7.1",
+    "typing-extensions>=4.8.0",
+    "asyncpg>=0.29.0",
+]
+requires-python = ">=3.8"
 readme = "README.md"
-homepage = "https://github.com/adriangb/pgjobq"
-
-[tool.poetry.dependencies]
-python = ">=3.7,<4"
-anyio = "~=3.6.1"
-typing-extensions = { version = "^4.3.0", python = "<3.8"}
-asyncpg = "~=0.26"
-
-[tool.poetry.group.dev.dependencies]
-black = { version = "*", allow-prereleases = true }
-pytest = "*"
-pre-commit = "*"
-pytest-cov = "*"
-trio = "*"
-isort = "*"
-flake8 = "*"
-mypy = "*"
-pydantic = "^1.10.2"
+license = {text = "MIT"}
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
-[tool.isort]
-profile = "black"
-
-[tool.coverage.run]
-branch = true
-source = ["pgjobq", "tests"]
-dynamic_context = "test_function"
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    '\.\.\.',
-    "raise NotImplementedError",
-    "TYPE_CHECKING",
-    "__repr__",
+[tool.pdm.dev-dependencies]
+black = [
+    "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "trio>=0.23.1",
+    "isort>=5.12.0",
+    "mypy>=1.7.0",
+    "ruff>=0.1.6",
+    "pydantic>=2.5.1",
+    "black>=23.11.0",
 ]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-
-[tool.mypy]
-files = "pgjobq/**/*.py,tests/**/*.py"
-show_error_codes = true
-pretty = true
-warn_unreachable = true
-strict = true
-warn_unused_ignores = false
